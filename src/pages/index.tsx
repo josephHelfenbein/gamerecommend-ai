@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import ResponseField from "../components/responseField";
 import { NextPage } from "next";
 import Head from 'next/head';
+import logo from '../../public/logo.svg';
 
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
@@ -20,29 +21,25 @@ const Home: NextPage = () => {
     <Head>
       <title>GameRecommend AI</title>
       <meta name='description' content='Home Page' />
-      <link rel='icon' href='../../public/favicon.svg' />
-      <link rel='mask-icon' href='../../public/favicon.svg' color='#000000' />
+      <link rel='icon' href='/favicon.svg' />
+      <link rel='mask-icon' href='/favicon.svg' color='#000000' />
       <meta name="theme-color" content="#ffffff" />
     </Head>
      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col gap-8 row-start-2 items-center w-full`}>
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src={logo}
+          alt="GameRecommend AI"
+          height={125}
           priority
+          className="pl-12 pr-12"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+        <p className="text-sm text-center font-[family-name:var(--font-geist-mono)] pl-12 pr-12">Can't think of any games to play? <br />Let GameRecommend AI help you with the power of AI.</p>
+        <ol className="max-w-sm list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-sans)]">
           <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
+              Enter in a game you really liked playing.
           </li>
-          <li>Save and see your changes instantly.</li>
+          <li>Press "find recommendations", and get a nearly instant list of recommended games, and reasons why.</li>
         </ol>
         <ResponseField />
       </main>

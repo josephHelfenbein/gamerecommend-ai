@@ -81,7 +81,7 @@ export default function ResponseField(){
                     <Form className="flex flex-col justify-center items-center p-6 ">
                         <div>
                             <label htmlFor="title_name" className="block mb-2 text-s font-medium text-gray-50 text-center">Game Title</label>
-                            <Field type="text" id="titleName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-96" placeholder="What's a game you really liked?" name="titleName" required />
+                            <Field type="text" id="titleName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-96 mb-3" placeholder="What's a game you really liked?" name="titleName" required />
                         </div>
                         <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-48 px-5 py-2.5 text-center m-1">Find Recommendations</button>
                     </Form>
