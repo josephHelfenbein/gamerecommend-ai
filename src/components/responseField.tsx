@@ -1,11 +1,11 @@
 'use client';
 import { fetchGPT } from "@/lib/http";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Formik, FormikHelpers, Form, Field } from "formik";
 import Image from "next/image";
 function reasonsListFunc(reasonsList:string[]){
     const returnList:React.JSX.Element[] = [];
-    let n=reasonsList.length;
+    const n=reasonsList.length;
     let currentKey = 100;
     for(let i=0; i<n; i++){
         if(reasonsList[i])

@@ -20,8 +20,8 @@ const Home: NextPage = () => {
     <Head>
       <title>GameRecommend AI</title>
       <meta name='description' content='Home Page' />
-      <link rel='icon' href='/favicon.svg' />
-      <link rel='mask-icon' href='/favicon.svg' color='#000000' />
+      <link rel='icon' href='../../public/favicon.svg' />
+      <link rel='mask-icon' href='../../public/favicon.svg' color='#000000' />
       <meta name="theme-color" content="#ffffff" />
     </Head>
      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
