@@ -14,9 +14,9 @@ export default async function handler(
                 {role:"user", content:`${prompt}`},
             ],
         });
-        res.status(200).json(result.choices[0].message.content);
+        return res.status(200).json(result.choices[0].message.content);
     } catch(error){
         console.error('Error in API:', error);
-        res.status(500).json({message:'An error occured while processing the request.', error: error});
+        return res.status(500).json({message:'An error occured while processing the request.', error: error});
     }
 }

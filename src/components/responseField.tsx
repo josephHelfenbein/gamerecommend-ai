@@ -1,6 +1,6 @@
 'use client';
-import { fetchGPT } from "@/lib/http";
-import { useState } from "react";
+import { fetchGPT, getImage } from "@/lib/http";
+import { useEffect, useState } from "react";
 import { Formik, FormikHelpers, Form, Field } from "formik";
 import Image from "next/image";
 function reasonsListFunc(reasonsList:string[]){
@@ -22,7 +22,7 @@ function reasonsListFunc(reasonsList:string[]){
     }
     return returnList;
 }
-function resultsList(titleNames:string[], titleReasons: string, setError:Function){
+function resultsList(titleNames:string[], titleReasons: string, images:string[], setError:Function){
     try{
         const reasonsList = JSON.parse(titleReasons);
         const returnList = [<h5 key='0' className="pt-8 p-2 text-center text-slate-300">Recommended Games</h5>];
@@ -31,7 +31,7 @@ function resultsList(titleNames:string[], titleReasons: string, setError:Functio
             if(titleNames[i])
                 returnList.push(
                     <div key={`${currentKey++}`} className="flex items-start space-x-6 p-6">
-                        <Image src="" key={`${currentKey++}`} alt="" width="60" height="60" className="flex-none rounded-md bg-slate-100" />
+                        <Image src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${images[i]}.jpg`} key={`${currentKey++}`} alt="" width="60" height="60" className="flex-none rounded-md bg-slate-100" />
                         <div key={`${currentKey++}`} className="min-w-0 relative flex-auto">
                             <p className="font-semibold text-slate-50 truncate pr-20" key={`${currentKey++}`}>
                                 {titleNames[i]}
@@ -55,6 +55,7 @@ interface Values{
 export default function ResponseField(){
     const [names, setNames] = useState(['']);
     const [reasons, setReasons] = useState('');
+    const [images, setImages] = useState(['']);
     const [error, setError] = useState('');
 
     return (
@@ -67,14 +68,16 @@ export default function ResponseField(){
                             const jsonRes = JSON.parse(res?.content!);
                             const titleNames = [];
                             const titleReasons = [];
+                            const coverImages:string[] = [];
                             for(let i=0; i<5; i++){
                                 titleNames.push(jsonRes.games[i].name);
                                 titleReasons.push(jsonRes.games[i].reasons);
+                                const coverImg = await getImage({title:titleNames[i], getting:'image'});
+                                coverImages.push(coverImg.content!);
                             }
                             setNames(titleNames);
                             setReasons(JSON.stringify(titleReasons));
-                            console.log(jsonRes);
-                            console.log(reasons);
+                            setImages(coverImages);
                             setSubmitting(false);
                         }),500);
                 }}>
@@ -90,7 +93,7 @@ export default function ResponseField(){
             {
                 names.length != 1 && 
                 <ul className="divide-y divide-slate-100">
-                    {resultsList(names, reasons, setError)}
+                    {resultsList(names, reasons, images, setError)}
                 </ul>
             }
             {
