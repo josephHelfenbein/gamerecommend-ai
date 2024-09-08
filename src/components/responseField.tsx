@@ -2,8 +2,9 @@
 import { fetchGPT } from "@/lib/http";
 import { useEffect, useState } from "react";
 import { Formik, FormikHelpers, Form, Field } from "formik";
+import Image from "next/image";
 function reasonsListFunc(reasonsList:string[]){
-    let returnList:React.JSX.Element[] = [];
+    const returnList:React.JSX.Element[] = [];
     let n=reasonsList.length;
     let currentKey = 100;
     for(let i=0; i<n; i++){
@@ -24,13 +25,13 @@ function reasonsListFunc(reasonsList:string[]){
 function resultsList(titleNames:string[], titleReasons: string, setError:Function){
     try{
         const reasonsList = JSON.parse(titleReasons);
-        let returnList = [<h5 key='0' className="pt-8 p-2 text-center text-slate-300">Recommended Games</h5>];
+        const returnList = [<h5 key='0' className="pt-8 p-2 text-center text-slate-300">Recommended Games</h5>];
         let currentKey=1;
         for(let i=0; i<5; i++){
             if(titleNames[i])
                 returnList.push(
                     <div key={`${currentKey++}`} className="flex items-start space-x-6 p-6">
-                        <img key={`${currentKey++}`} alt="" width="60" height="60" className="flex-none rounded-md bg-slate-100" />
+                        <Image src="" key={`${currentKey++}`} alt="" width="60" height="60" className="flex-none rounded-md bg-slate-100" />
                         <div key={`${currentKey++}`} className="min-w-0 relative flex-auto">
                             <p className="font-semibold text-slate-50 truncate pr-20" key={`${currentKey++}`}>
                                 {titleNames[i]}
@@ -64,8 +65,8 @@ export default function ResponseField(){
                         (async()=>{
                             const res = await fetchGPT({prompt:values.titleName});
                             const jsonRes = JSON.parse(res?.content!);
-                            let titleNames = [];
-                            let titleReasons = [];
+                            const titleNames = [];
+                            const titleReasons = [];
                             for(let i=0; i<5; i++){
                                 titleNames.push(jsonRes.games[i].name);
                                 titleReasons.push(jsonRes.games[i].reasons);
@@ -91,7 +92,10 @@ export default function ResponseField(){
                 <ul className="divide-y divide-slate-100">
                     {resultsList(names, reasons, setError)}
                 </ul>
-                
+            }
+            {
+                error !== '' && 
+                <p>{error}</p>
             }
         </div>
         
