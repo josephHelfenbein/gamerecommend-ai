@@ -74,7 +74,7 @@ export default function ResponseField(){
         <div className="w-full max-w-5xl">
             {loading && 
                 <div className='fixed w-full -translate-x-16 top-1/2 start-1/2' style={{zIndex:500}}>
-                    <SyncLoader color="#ff5050" margin={6} size={30} />
+                    <SyncLoader color="#ff2050" margin={6} size={30} />
                 </div>
             }
             <div>
