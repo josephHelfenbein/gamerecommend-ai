@@ -10,7 +10,7 @@ export default async function handler(
         const result = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
-                {role: "system", content: "Take in the user input as the name of a videogame. Give the top 5 videogames the user would like if they liked the input videogame, and put the results in JSON form. Please don't write any extra text. Make the JSON format be 'games', and each game have 'name' and 'reasons', the reasons being an array with exactly 5 strings. Don't include the leading and ending ```json and ```, just have the json in plaintext."},
+                {role: "system", content: "Take in the user input as the name of a videogame. Give the top 5 videogames the user would like if they liked the input videogame, and put the results in JSON form. Please don't write any extra text. Make the JSON format be 'games', and each game have 'name' and 'reasons', the reasons being an array with exactly 5 strings. The results must be real games that exist, not made up, and the name be the exact release name. Don't include the leading and ending ```json and ```, just have the json in plaintext."},
                 {role:"user", content:`${prompt}`},
             ],
         });

@@ -3,6 +3,8 @@ import { fetchGPT, getImage } from "@/lib/http";
 import { useEffect, useState } from "react";
 import { Formik, FormikHelpers, Form, Field } from "formik";
 import Image from "next/image";
+import { SyncLoader } from "react-spinners";
+
 function reasonsListFunc(reasonsList:string[]){
     const returnList:React.JSX.Element[] = [];
     const n=reasonsList.length;
@@ -33,9 +35,15 @@ function resultsList(titleNames:string[], titleReasons: string, images:string[],
                     <div key={`${currentKey++}`} className="flex items-start space-x-6 p-6">
                         <Image src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${images[i]}.jpg`} key={`${currentKey++}`} alt="" width="60" height="60" className="flex-none rounded-md bg-slate-100" />
                         <div key={`${currentKey++}`} className="min-w-0 relative flex-auto">
-                            <p className="font-semibold text-slate-50 truncate pr-20" key={`${currentKey++}`}>
-                                {titleNames[i]}
-                            </p>
+                            <div>
+                                <p className="font-semibold text-slate-50 truncate pr-5" key={`${currentKey++}`}>
+                                    {titleNames[i]}
+                                </p>
+                                <a className="text-slate-400 text-sm truncate pr-20" href={`https://www.google.com/search?q=${titleNames[i]}`} target="_blank" rel="noopener noreferrer">
+                                    Search on Google
+                                </a>  
+                            </div>
+                            
                             <dl className="mt-2 flex flex-wrap text-sm leading-6 font-medium">
                                 {reasonsListFunc(reasonsList[i])}
                             </dl>
@@ -49,6 +57,9 @@ function resultsList(titleNames:string[], titleReasons: string, images:string[],
         setError('Error, please try again. ' + error);
     }
 }
+const delay = (ms:number) => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 interface Values{
     titleName: string;
 }
@@ -57,13 +68,20 @@ export default function ResponseField(){
     const [reasons, setReasons] = useState('');
     const [images, setImages] = useState(['']);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     return (
-        <div className="w-full">
+        <div className="w-full max-w-5xl">
+            {loading && 
+                <div className='fixed w-full -translate-x-16 top-1/2 start-1/2' style={{zIndex:500}}>
+                    <SyncLoader color="#ff5050" margin={6} size={30} />
+                </div>
+            }
             <div>
                 <Formik initialValues={{titleName:''}} onSubmit={(values:Values, {setSubmitting}:FormikHelpers<Values>)=>{
                     setTimeout(
                         (async()=>{
+                            setLoading(true);
                             const res = await fetchGPT({prompt:values.titleName});
                             const jsonRes = JSON.parse(res?.content!);
                             const titleNames = [];
@@ -74,10 +92,12 @@ export default function ResponseField(){
                                 titleReasons.push(jsonRes.games[i].reasons);
                                 const coverImg = await getImage({title:titleNames[i], getting:'image'});
                                 coverImages.push(coverImg.content!);
+                                await delay(250);
                             }
                             setNames(titleNames);
                             setReasons(JSON.stringify(titleReasons));
                             setImages(coverImages);
+                            setLoading(false);
                             setSubmitting(false);
                         }),500);
                 }}>
