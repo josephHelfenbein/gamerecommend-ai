@@ -34,12 +34,12 @@ const Home: NextPage = () => {
           priority
           className="pl-12 pr-12"
         />
-        <p className="text-sm text-center font-[family-name:var(--font-geist-mono)] pl-12 pr-12">Can't think of any games to play? <br />Let GameRecommend AI help you with the power of AI.</p>
+        <p className="text-sm text-center font-[family-name:var(--font-geist-mono)] pl-12 pr-12">Can&apos;t think of any games to play? <br/> Let GameRecommend AI help you with the power of AI.</p>
         <ol className="max-w-sm list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-sans)]">
           <li className="mb-2">
               Enter in a game you really liked playing.
           </li>
-          <li>Press "find recommendations", and get a nearly instant list of recommended games, and reasons why.</li>
+          <li>Press &quot;find recommendations&quot;, and get a nearly instant list of recommended games, and reasons why.</li>
         </ol>
         <ResponseField />
       </main>
