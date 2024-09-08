@@ -96,7 +96,7 @@ The information from OpenAI API and IGDB API are then styled and displayed, alon
 * [![TypeScript][TypeScript]][TypeScript-url]
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
-* [![Tailwind][Tailwind]][Tailwind]
+* [![Tailwind][Tailwind]][Tailwind-url]
 * [![OpenAI][OpenAI]][OpenAI-url]
 * [![IGDB][IGDB]][IGDB-url]
 
