@@ -169,10 +169,12 @@ Here are the steps to run the project locally if you want to develop your own pr
 Distributed under the Apache 2.0 License. See `LICENSE.txt` for more information.
 
 
-
+This project was submitted to the United Hacks V3 hackathon, winning Best Solo Hack. 
+Devpost link: [https://devpost.com/software/gamerecommend-ai](https://devpost.com/software/gamerecommend-ai)
 
 
 Project Link: [https://github.com/josephHelfenbein/gamerecommend-ai](https://github.com/josephHelfenbein/gamerecommend-ai)
+
 
 * [Best README Template](https://github.com/othneildrew/Best-README-Template)
 
